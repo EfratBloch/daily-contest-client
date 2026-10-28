@@ -25,7 +25,9 @@ export function HomePage(){
     <div className="drawings">
         <span className="burst">🏆</span>
         <span className="burst">🎨</span>
-        
+        <span className="burst">✨</span>
+        <span className="burst">🥇</span>
+        <span className="burst">💡</span>
     </div>
     <div className="steps">
     <div className="step">
