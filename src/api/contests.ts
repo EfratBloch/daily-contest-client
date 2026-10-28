@@ -38,3 +38,13 @@ export const editContest=async(id:number,contestInput:ContestInput)=>{
     const res=await api.put<Contest>(`/api/contests/${id}`,contestInput)
     return res.data
 }
+export const startVoting=async(id:number)=>{
+
+    const res=await api.post<Contest>(`/api/contests/${id}/start-voting`)
+    return res.data
+}
+export const closeContest=async(id:number)=>{
+
+    const res=await api.post<Contest>(`/api/contests/${id}/close`)
+    return res.data
+}

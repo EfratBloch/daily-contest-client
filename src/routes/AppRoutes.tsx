@@ -19,15 +19,15 @@ export function AppRoutes() {
     return <Routes>
         <Route element={<Layout/>}>
         <Route path='/' element={<HomePage/>}></Route>
-        <Route path='/login' element={<LoginPage />}></Route>
-        <Route path='/register' element={<RegisterPage />}></Route>
-        <Route path='/contests' element={<ContestsPage />}></Route>
+        <Route path='/login' element={<LoginPage/>}></Route>
+        <Route path='/register' element={<RegisterPage/>}></Route>
+        <Route path='/contests' element={<ContestsPage/>}></Route>
         <Route path='/today' element={<TodayPage />}></Route>
-        <Route path='/contests/:id' element={<ContestPage />}></Route>
+        <Route path='/contests/:id' element={<ContestPage/>}></Route>
         <Route path='/contests/:id/submit' element={<ProtectedRoute role="USER"><SubmitPage /></ProtectedRoute>}></Route>
         <Route path='/submissions/:id/edit' element={<ProtectedRoute role="USER"><EditSubmissionPage /></ProtectedRoute>}></Route>
         <Route path='/my-submissions' element={<ProtectedRoute role="USER"><MySubmissionsPage /></ProtectedRoute>}></Route>
-        <Route path='/winners' element={<WinnersPage />}></Route>
+        <Route path='/winners' element={<WinnersPage/>}></Route>
         <Route path='/admin/contests/new' element={<ProtectedRoute role="ADMIN"><ContestFormPage /></ProtectedRoute>}></Route>
         <Route path='/admin/contests/:id/edit' element={<ProtectedRoute role="ADMIN"><ContestFormPage /></ProtectedRoute>}></Route>
         <Route path='/admin/contests/:id' element={<ProtectedRoute role="ADMIN"><ManageContestPage /></ProtectedRoute>}></Route>

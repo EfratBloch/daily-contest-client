@@ -5,7 +5,7 @@ import { useMutation ,useQueryClient,useQuery} from "@tanstack/react-query"
 import { createContest, editContest, getContest} from "../api/contests"
 import { useNavigate, useParams } from "react-router-dom"
 import { getErrorMessage } from "../api/client";
-
+import { Link } from "react-router-dom"
 const contestSchema=z.object({
     title:z.string().min(3,'יש להזין כותרת לפחות 3 תווים').max(100,'אפשר עד 100 תווים'),
     instructions:z.string("יש להזין הוראה").min(1,"יש להזין הוראה").max(1000),
@@ -54,6 +54,8 @@ export function ContestFormPage(){
     </div> 
     {error&&<p>{getErrorMessage(error)}</p>}
      <button type="submit" disabled={isPending}>שמירה</button> 
+    
     </form>
+    <Link to={`/contests/${id}`}>לדף התחרות</Link>
     </>
 }

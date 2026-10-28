@@ -1,7 +1,7 @@
 import { useQuery ,useQueryClient} from "@tanstack/react-query"
 import { getGallery } from "../api/submissions"
 import { getErrorMessage } from "../api/client"
-import { useParams } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import { useMutation } from "@tanstack/react-query"
 import { MapStatus } from "../utils/labels"
 import { SubmissionCard } from "../components/SubmissionCard"
@@ -30,6 +30,7 @@ export function ContestPage(){
     return <>    
     <h1>{data.contest.title}</h1>
     <p>{data.contest.instructions}</p>
+    {user?.role=="ADMIN"&&<Link to={`/admin/contests/${id}`}>ניהול התחרות</Link>}
     {data.items.length===0&&<p>עוד אין הגשות</p>}
     <p>{MapStatus[data.contest.status]}</p>
     <p>{voteError&&getErrorMessage(voteError)}</p>
