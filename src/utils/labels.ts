@@ -1,7 +1,7 @@
 export const MapStatus={
-    'SUBMISSION': 'הגשה',
-    'VOTING':'הצבעה',
-    'CLOSED':'סגורה'
+    'SUBMISSION': 'התחרות פתוחה להגשות',
+    'VOTING':'התחרות פתוחה להצבעה',
+    'CLOSED':'התחרות נסגרה, אפשר לראות את המנצחות'
 }
 export const MapType={
     'IMAGE': 'תמונות',

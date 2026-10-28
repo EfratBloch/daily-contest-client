@@ -5,7 +5,8 @@ import App from './App.tsx'
 import { AuthProvider } from './context/AuthContext.tsx'
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query'
 import { BrowserRouter } from 'react-router-dom'
-const queryClient = new QueryClient()
+const queryClient = new QueryClient({ defaultOptions: { queries: { staleTime: 30000, refetchOnWindowFocus: false } } })
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
@@ -15,5 +16,5 @@ createRoot(document.getElementById('root')!).render(
         </AuthProvider>
       </BrowserRouter>
     </QueryClientProvider>
-  </StrictMode>,
+  </StrictMode>
 )
