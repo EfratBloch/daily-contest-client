@@ -31,7 +31,7 @@ export function ContestPage(){
     <h1>{data.contest.title}</h1>
     <p>{data.contest.instructions}</p>
     {user?.role=="ADMIN"&&<Link className="btn" to={`/admin/contests/${id}`}>ניהול התחרות</Link>}
-    {data.contest.status==="SUBMISSION"&&user?.role==="USER"&&!data.items.some(s=>s.isMine)&&<Link className="btn" to={`/contests/${id}/submit`}>להגשה</Link>}
+    {data.contest.status==="SUBMISSION"&&user?.role==="USER"&&!data.items.some(s=>s.isMine)&&<Link className="btn" to={`/contests/${id}/submit`}>להגשת יצירה משלך</Link>}
     {data.items.length===0&&<p>עוד אין הגשות</p>}
     <p className="badge">{MapStatus[data.contest.status]}</p>
     <p className="error">{voteError&&getErrorMessage(voteError)}</p>

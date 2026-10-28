@@ -13,6 +13,7 @@ export function ManageContestPage(){
              mutationFn:(status:ContestsStatus)=>status==="SUBMISSION"?startVoting(Number(id)):closeContest(Number(id)),
              onSuccess:()=>{
              queryClient.invalidateQueries({queryKey:['contest',id]});     
+             queryClient.invalidateQueries({queryKey:['winners']});     
              queryClient.invalidateQueries({queryKey:['gallery',id]});     
              queryClient.invalidateQueries({queryKey:['contests']});     
              queryClient.invalidateQueries({queryKey:['home']});}

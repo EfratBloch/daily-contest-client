@@ -48,3 +48,7 @@ export const closeContest=async(id:number)=>{
     const res=await api.post<Contest>(`/api/contests/${id}/close`)
     return res.data
 }
+export const getWinners=async()=>{
+        const res=await api.get<Paged<Contest>>(`/api/winners`)
+    return res.data
+}
