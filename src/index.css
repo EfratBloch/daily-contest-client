@@ -20,7 +20,7 @@
   --shadow: 0 2px 10px rgba(31, 29, 43, 0.08);
   font-family: system-ui, 'Segoe UI', Arial, sans-serif;
   color: var(--text);
-  background: linear-gradient(160deg, #eaf2ff 0%, #f6f9ff 45%, #fff8e6 100%) fixed;
+  background: radial-gradient(ellipse at top, #6f97f2 0%, #3f6fdc 45%, #2c55b8 100%) fixed;
   line-height: 1.5;
 }
 
@@ -362,59 +362,24 @@ form p,
 }
 
 .home h1 {
-  font-size: 3rem;
+  font-size: 3.2rem;
   font-weight: 800;
   letter-spacing: -0.5px;
-  background: linear-gradient(90deg, var(--primary), var(--red));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
 }
 
-/* The two shapes cover the whole screen area, behind the content */
-.home::before,
-.home::after {
+.home h1::after {
   content: "";
-  position: fixed;
-  top: 50%;
-  width: 46vmax;
-  height: 46vmax;
-  border-radius: 50%;
-  z-index: -1;
-  pointer-events: none;
-  filter: blur(8px);
-  opacity: 0.28;
-}
-
-/* From the right: red to pink */
-.home::before {
-  right: 0;
-  background: radial-gradient(circle at 30% 30%, var(--pink), var(--red) 70%);
-  animation: from-right 14s ease-in-out infinite;
-}
-
-/* From the left: blue to yellow */
-.home::after {
-  left: 0;
-  background: radial-gradient(circle at 70% 30%, var(--blue), var(--primary) 70%);
-  animation: from-left 14s ease-in-out infinite;
-  animation-delay: -7s;
-}
-
-/* Enters the screen, stays a moment, and leaves the same way it came */
-@keyframes from-right {
-  0%, 100% { transform: translate(110%, -50%) scale(0.8); }
-  40%, 60% { transform: translate(35%, -50%) scale(1); }
-}
-
-@keyframes from-left {
-  0%, 100% { transform: translate(-110%, -50%) scale(0.8); }
-  40%, 60% { transform: translate(-35%, -50%) scale(1); }
+  display: block;
+  width: 90px;
+  height: 4px;
+  margin: 14px auto 0;
+  border-radius: 4px;
+  background: linear-gradient(90deg, var(--red), var(--yellow), var(--blue));
 }
 
 /* People who prefer less motion get a still page */
 @media (prefers-reduced-motion: reduce) {
-  .home::before, .home::after { animation: none; }
+  body::before, body::after { animation: none; }
 }
 
 /* ===== Every link inside a page looks like a button ===== */
@@ -463,8 +428,8 @@ fieldset:disabled {
 
 /* ===== Home page content ===== */
 .hero-text {
-  font-size: 1.2rem;
-  color: var(--muted);
+  font-size: 1.25rem;
+  color: rgba(255, 255, 255, 0.85);
   max-width: 560px;
   margin: 0 auto 24px;
 }
@@ -557,4 +522,132 @@ fieldset:disabled {
 
 @media (prefers-reduced-motion: reduce) {
   .burst { animation: none; }
+}
+
+/* ===== Text that sits directly on the strong background is white ===== */
+.container {
+  color: #fff;
+}
+
+.container > h1,
+.container > div > h1 {
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+.container > p,
+.container > div > p {
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+}
+
+/* Cards and forms keep dark text on white */
+.card,
+form {
+  color: var(--text);
+}
+
+/* Messages outside cards get a white bubble so they can always be read */
+.container > .error:not(:empty) {
+  display: inline-block;
+  background: #fff;
+  padding: 6px 14px;
+  border-radius: 8px;
+  text-shadow: none;
+}
+
+.container > .badge {
+  background: #fff;
+  color: var(--primary);
+  text-shadow: none;
+}
+
+/* ===== Sparkles: two layers of tiny stars that twinkle over the whole page ===== */
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-repeat: repeat;
+}
+
+body::before {
+  background-image:
+    radial-gradient(1.5px 1.5px at 20px 30px, #fff, transparent),
+    radial-gradient(1.5px 1.5px at 140px 80px, var(--yellow), transparent),
+    radial-gradient(1px 1px at 90px 160px, #fff, transparent),
+    radial-gradient(2px 2px at 210px 220px, var(--yellow), transparent),
+    radial-gradient(1px 1px at 260px 40px, #fff, transparent);
+  background-size: 300px 260px;
+  animation: twinkle 4s ease-in-out infinite;
+}
+
+body::after {
+  background-image:
+    radial-gradient(1px 1px at 60px 110px, #fff, transparent),
+    radial-gradient(2px 2px at 180px 30px, #fff, transparent),
+    radial-gradient(1.5px 1.5px at 240px 150px, var(--blue), transparent),
+    radial-gradient(1px 1px at 120px 230px, var(--pink), transparent);
+  background-size: 340px 280px;
+  animation: twinkle 6s ease-in-out infinite;
+  animation-delay: -3s;
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.25; }
+  50%      { opacity: 1; }
+}
+
+/* ===== A different background for each kind of page (same style, other shade) =====
+   :has() checks what the page contains, so no change in the components is needed. */
+
+/* All contests list (has the filters row): golden yellow */
+html:has(.filters) {
+  background: radial-gradient(ellipse at top, #ffd36b 0%, #f4b23a 45%, #e0941c 100%) fixed;
+}
+
+/* Pages with a form (login, register, new contest, submit): light red */
+html:has(form) {
+  background: radial-gradient(ellipse at top, #f7a1a8 0%, #ee7480 50%, #e35d6a 100%) fixed;
+}
+
+/* Pages with submissions (contest gallery, my submissions, winners): light blue (tchelet) */
+html:has(.media) {
+  background: radial-gradient(ellipse at top, #a6e3f7 0%, #6ccbef 50%, #43b4e3 100%) fixed;
+}
+
+/* ===== Home page items in red and yellow ===== */
+.hero-actions a:not(.btn),
+.hero-actions .btn {
+  background: var(--yellow);
+  color: #3b2a00;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+}
+
+.hero-actions a:not(.btn):hover,
+.hero-actions .btn:hover {
+  background: #f0ad1a;
+  color: #3b2a00;
+}
+
+/* The first button (the main action) is red */
+.hero-actions > :first-child,
+.hero-actions .btn-red {
+  background: var(--red);
+  color: #fff;
+}
+
+.hero-actions > :first-child:hover,
+.hero-actions .btn-red:hover {
+  background: #c22f3b;
+  color: #fff;
+}
+
+.home h1::after {
+  background: linear-gradient(90deg, var(--red), var(--yellow));
+}
+
+/* Winners page: light red (it also has submission cards, so it needs its own class) */
+html:has(.winners-page) {
+  background: radial-gradient(ellipse at top, #f7a1a8 0%, #ee7480 50%, #e35d6a 100%) fixed;
 }

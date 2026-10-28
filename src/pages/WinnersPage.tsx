@@ -13,8 +13,8 @@ export function WinnersPage(){
         return null
     const last=data.items.find(c=>c.winners.length>0)
     if(!last)
-        return <>עוד אין מנצחים</>
-    return <div >
+        return <div className="winners-page"><p>עוד אין מנצחים</p></div>
+    return <div className="winners-page">
     <h1>המנצחים האחרונים!!!</h1>
     <p><Link to={`/contests/${last.id}`}>{last.title}</Link></p>
     <div className="grid">{last.winners.map((c)=><div key={c.id}>
