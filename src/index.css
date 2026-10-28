@@ -651,3 +651,77 @@ html:has(.media) {
 html:has(.winners-page) {
   background: radial-gradient(ellipse at top, #f7a1a8 0%, #ee7480 50%, #e35d6a 100%) fixed;
 }
+
+/* ===== Home page: "how it works" - three red squares side by side ===== */
+.steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  width: 100%;
+  max-width: 820px;
+  margin: 40px auto 10px;
+}
+
+.step {
+  aspect-ratio: 1 / 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 18px;
+  border-radius: 18px;
+  background: linear-gradient(160deg, #f26b75, var(--red));
+  color: #fff;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.18);
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.step:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.22);
+}
+
+/* The icon on top of each square: same round shape for all three, a different color each */
+.step span {
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #fff;
+  font-size: 1.8rem;
+  font-weight: 800;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  margin-bottom: 6px;
+}
+
+.step:nth-child(1) span { color: var(--red); }
+.step:nth-child(2) span { color: var(--primary); }
+.step:nth-child(3) span { color: #d99a00; }
+
+.step h3 {
+  margin: 0;
+  font-size: 1.3rem;
+}
+
+.step p {
+  margin: 0;
+  font-size: 0.95rem;
+  opacity: 0.92;
+  text-shadow: none;
+}
+
+/* On a narrow screen (phone) the squares stand one under the other */
+@media (max-width: 640px) {
+  .steps {
+    grid-template-columns: 1fr;
+    max-width: 260px;
+  }
+}
+
+/* Contest page (gallery with a stage label): light red */
+html:has(.container > .badge):has(.media) {
+  background: radial-gradient(ellipse at top, #f7a1a8 0%, #ee7480 50%, #e35d6a 100%) fixed;
+}

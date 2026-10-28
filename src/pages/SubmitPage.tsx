@@ -39,6 +39,7 @@ export function SubmitPage() {
         <h1>הגשה לתחרות: {contest?.title}</h1>
         <p>{contest?.instructions}</p>
         <form noValidate onSubmit={handleSubmit(onSubmit)}>
+            <fieldset disabled={isPending}>
             <div>
                 <label>כותרת</label>
                 <input {...register('title')} type="text" />
@@ -55,10 +56,10 @@ export function SubmitPage() {
                 <p>{errors.file?.message}</p>
             </div>
             {submitError && <p>{getErrorMessage(submitError)}</p>}
-            <button type="submit" disabled={isPending}>הגשה</button>
+            <button type="submit" >{isPending?"שולח":"הגשה"}</button>
 
 
-
+            </fieldset>
         </form>
     </>
 }

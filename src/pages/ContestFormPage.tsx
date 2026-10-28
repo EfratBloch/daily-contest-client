@@ -35,6 +35,7 @@ export function ContestFormPage(){
     return <>
     <h1>{isEdit?"עריכת תחרות":"תחרות חדשה"}</h1>
     <form onSubmit={handleSubmit(onSubmit)} noValidate>
+        <fieldset disabled={isPending}>
     <div>
         <label>כותרת</label>
         <input {...register('title')} type= "text" />
@@ -53,8 +54,8 @@ export function ContestFormPage(){
     </select>    
     </div> 
     {error&&<p>{getErrorMessage(error)}</p>}
-     <button type="submit" disabled={isPending}>שמירה</button> 
-    
+     <button type="submit" >{isPending?"שולח":"שמירה"}</button> 
+    </fieldset>
     </form>
     <Link to={`/contests/${id}`}>לדף התחרות</Link>
     </>
