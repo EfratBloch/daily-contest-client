@@ -1,111 +1,414 @@
+/* ===== Colors and base ===== */
 :root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
-
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
-
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
-  color-scheme: light dark;
+  --red: #ff4d6d;
+  --yellow: #ffd23f;
+  --blue: #4cc9f0;
+  --pink: #ff8fab;
+  --primary: #ff4d6d;
+  --primary-dark: #e63956;
+  --primary-light: #ffe3ea;
+  --blue-light: #e0f6fd;
+  --deep-blue: #3a86ff;
+  --text: #1f1d2b;
+  --muted: #6b6878;
+  --bg: #fffaf0;
+  --card: #ffffff;
+  --border: #e4e1ef;
+  --error: #c62828;
+  --gold: #ffd23f;
+  --radius: 12px;
+  --shadow: 0 2px 10px rgba(31, 29, 43, 0.08);
+  font-family: system-ui, 'Segoe UI', Arial, sans-serif;
   color: var(--text);
-  background: var(--bg);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
-  @media (max-width: 1024px) {
-    font-size: 16px;
-  }
+  background: linear-gradient(135deg, #e3f4fd 0%, #fdeaf0 50%, #fff7d9 100%) fixed;
+  line-height: 1.5;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
-  }
-
-  #social .button-icon {
-    filter: invert(1) brightness(2);
-  }
-}
-
-#root {
-  width: 1126px;
-  max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  border-inline: 1px solid var(--border);
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
+* {
   box-sizing: border-box;
 }
 
 body {
   margin: 0;
-}
-
-h1,
-h2 {
-  font-family: var(--heading);
-  font-weight: 500;
-  color: var(--text-h);
+  direction: rtl;
 }
 
 h1 {
-  font-size: 56px;
-  letter-spacing: -1.68px;
-  margin: 32px 0;
-  @media (max-width: 1024px) {
-    font-size: 36px;
-    margin: 20px 0;
-  }
+  font-size: 1.8rem;
+  margin: 0 0 12px;
 }
-h2 {
-  font-size: 24px;
-  line-height: 118%;
-  letter-spacing: -0.24px;
+
+h3 {
   margin: 0 0 8px;
-  @media (max-width: 1024px) {
-    font-size: 20px;
-  }
 }
-p {
+
+a {
+  color: var(--primary);
+}
+
+/* ===== Header and menu ===== */
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 14px 24px;
+  background: var(--card);
+  box-shadow: var(--shadow);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  border-bottom: 4px solid transparent;
+  border-image: linear-gradient(90deg, var(--red), var(--yellow), var(--blue), var(--pink)) 1;
+}
+
+.logo {
+  font-weight: 800;
+  font-size: 1.3rem;
+  background: linear-gradient(90deg, var(--red), var(--pink), var(--blue));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  letter-spacing: 1px;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.nav a {
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.nav a:hover {
+  color: var(--primary);
+}
+
+.nav p {
+  margin: 0;
+  margin-inline-start: 12px;
+  color: var(--muted);
+}
+
+/* Keep every link together, and the greeting + logout button at the end */
+.nav p,
+.nav button {
+  order: 2;
+}
+
+/* ===== Page area ===== */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 28px 20px 60px;
+}
+
+/* ===== Buttons (real buttons and links that look like buttons) ===== */
+button,
+.btn {
+  display: inline-block;
+  padding: 8px 18px;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(135deg, var(--red), var(--pink));
+  color: #fff;
+  font: inherit;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-inline-end: 8px;
+}
+
+button:hover,
+.btn:hover {
+  background: var(--primary-dark);
+  transform: translateY(-1px);
+}
+
+button:disabled {
+  background: #c9c5d8;
+  cursor: not-allowed;
+}
+
+.btn-light {
+  background: var(--blue-light);
+  color: #0b6d8c;
+}
+
+.btn-light:hover {
+  background: var(--blue);
+  color: #fff;
+}
+
+/* ===== Forms ===== */
+form {
+  max-width: 520px;
+  background: var(--card);
+  padding: 24px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+form > div {
+  margin-bottom: 6px;
+}
+
+label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+input,
+textarea,
+select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font: inherit;
+  background: #fff;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: 2px solid var(--primary-light);
+  border-color: var(--primary);
+}
+
+textarea {
+  min-height: 110px;
+  resize: vertical;
+}
+
+/* Big dashed drop area for choosing a file (drag & drop still works) */
+input[type='file'] {
+  padding: 28px 12px;
+  border: 2px dashed var(--blue);
+  background: var(--blue-light);
+  cursor: pointer;
+}
+
+/* Field error messages under each input */
+form p,
+.error {
+  color: var(--error);
+  font-size: 0.9rem;
+  margin: 4px 0 8px;
+  min-height: 1em;
+}
+
+/* ===== Search and filters row ===== */
+.filters {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.filters input {
+  flex: 2;
+  min-width: 200px;
+}
+
+.filters select {
+  flex: 1;
+  min-width: 140px;
+}
+
+/* ===== Cards grid ===== */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 18px;
+  margin: 18px 0;
+}
+
+.card {
+  background: var(--card);
+  border-top: 5px solid var(--pink);
+  transition: transform 0.2s;
+  border: 2px solid transparent;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.card p {
   margin: 0;
 }
 
-code,
-.counter {
-  font-family: var(--mono);
-  display: inline-flex;
-  border-radius: 4px;
-  color: var(--text-h);
+/* A submission the user voted for */
+.card.voted {
+  border-color: var(--yellow);
+  background: #fff8d6;
 }
 
-code {
-  font-size: 15px;
-  line-height: 135%;
-  padding: 4px 8px;
-  background: var(--code-bg);
+.media {
+  position: relative;
+  margin: 6px 0;
+}
+
+.media img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  display: block;
+}
+
+.media .btn {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  padding: 4px 12px;
+  font-size: 0.85rem;
+}
+
+/* Text submissions */
+.media p {
+  background: #faf9ff;
+  border-radius: 8px;
+  padding: 36px 12px 12px;
+  white-space: pre-wrap;
+}
+
+.card button {
+  margin-top: 8px;
+  align-self: flex-start;
+}
+
+/* ===== Small labels ===== */
+.badge {
+  display: inline-block;
+  align-self: flex-start;
+  background: var(--blue-light);
+  color: #0b6d8c;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 2px 10px;
+  border-radius: 999px;
+  margin: 4px 0 12px;
+}
+
+.place {
+  align-self: flex-start;
+  background: var(--gold);
+  color: #3b2a00;
+  font-weight: 700;
+  padding: 2px 10px;
+  border-radius: 999px;
+}
+
+.place::before {
+  content: '🏆 ';
+}
+
+.muted {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+/* ===== Pages navigation ===== */
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 10px;
+}
+
+.pagination p {
+  margin: 0;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+}
+
+.grid .card:nth-child(4n + 2) { border-top-color: var(--blue); }
+.grid .card:nth-child(4n + 3) { border-top-color: var(--yellow); }
+.grid .card:nth-child(4n + 4) { border-top-color: var(--red); }
+
+/* ===== Home page: clean title + two shapes that slide in from the sides ===== */
+.home {
+  min-height: 65vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px 24px;
+}
+
+.home > * {
+  position: relative;
+  z-index: 1;
+}
+
+.home h1 {
+  font-size: 3rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  background: linear-gradient(90deg, var(--red), var(--pink), var(--deep-blue));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* The two shapes cover the whole screen area, behind the content */
+.home::before,
+.home::after {
+  content: "";
+  position: fixed;
+  top: 50%;
+  width: 46vmax;
+  height: 46vmax;
+  border-radius: 50%;
+  z-index: -1;
+  pointer-events: none;
+  filter: blur(8px);
+  opacity: 0.55;
+}
+
+/* From the right: red to pink */
+.home::before {
+  right: 0;
+  background: radial-gradient(circle at 30% 30%, var(--pink), var(--red));
+  animation: from-right 14s ease-in-out infinite;
+}
+
+/* From the left: blue to yellow */
+.home::after {
+  left: 0;
+  background: radial-gradient(circle at 70% 30%, var(--yellow), var(--blue) 60%, var(--deep-blue));
+  animation: from-left 14s ease-in-out infinite;
+  animation-delay: -7s;
+}
+
+/* Enters the screen, stays a moment, and leaves the same way it came */
+@keyframes from-right {
+  0%, 100% { transform: translate(110%, -50%) scale(0.8); }
+  40%, 60% { transform: translate(35%, -50%) scale(1); }
+}
+
+@keyframes from-left {
+  0%, 100% { transform: translate(-110%, -50%) scale(0.8); }
+  40%, 60% { transform: translate(-35%, -50%) scale(1); }
+}
+
+/* People who prefer less motion get a still page */
+@media (prefers-reduced-motion: reduce) {
+  .home::before, .home::after { animation: none; }
 }

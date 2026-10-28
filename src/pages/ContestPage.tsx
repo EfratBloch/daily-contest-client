@@ -30,11 +30,13 @@ export function ContestPage(){
     return <>    
     <h1>{data.contest.title}</h1>
     <p>{data.contest.instructions}</p>
-    {user?.role=="ADMIN"&&<Link to={`/admin/contests/${id}`}>ניהול התחרות</Link>}
-    {data.contest.status==="SUBMISSION"&&user?.role==="USER"&&!data.items.some(s=>s.isMine)&&<Link to={`/contests/${id}/submit`}>להגשה</Link>}
+    {user?.role=="ADMIN"&&<Link className="btn" to={`/admin/contests/${id}`}>ניהול התחרות</Link>}
+    {data.contest.status==="SUBMISSION"&&user?.role==="USER"&&!data.items.some(s=>s.isMine)&&<Link className="btn" to={`/contests/${id}/submit`}>להגשה</Link>}
     {data.items.length===0&&<p>עוד אין הגשות</p>}
-    <p>{MapStatus[data.contest.status]}</p>
-    <p>{voteError&&getErrorMessage(voteError)}</p>
-    {data.items.map(c=><SubmissionCard submission={c} key={c.id} onVote={(submission:Submission)=>mutate(submission)} canVote={data.contest.status==='VOTING'&&user?.role==='USER'&&!c.isMine}></SubmissionCard>)}    
+    <p className="badge">{MapStatus[data.contest.status]}</p>
+    <p className="error">{voteError&&getErrorMessage(voteError)}</p>
+    <div className="grid">
+    {data.items.map(c=><SubmissionCard submission={c} key={c.id} onVote={(submission:Submission)=>mutate(submission)} canVote={data.contest.status==='VOTING'&&user?.role==='USER'&&!c.isMine}></SubmissionCard>)}
+    </div>
     </>
 }

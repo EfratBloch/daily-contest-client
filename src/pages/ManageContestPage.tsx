@@ -25,10 +25,10 @@ export function ManageContestPage(){
         return null
     return<>
     <h1>ניהול: {data.title}</h1>
-    <p>שלב: {MapStatus[data.status]}</p>
-    <p><Link to={`/admin/contests/${id}/edit`}>עריכה</Link></p>
-    <p><Link to={`/contests/${id}`}>לדף התחרות</Link></p>
+    <p className="badge">שלב: {MapStatus[data.status]}</p>
+    <p><Link className="btn btn-light" to={`/admin/contests/${id}/edit`}>עריכה</Link></p>
+    <p><Link className="btn btn-light" to={`/contests/${id}`}>לדף התחרות</Link></p>
     {data.status!=="CLOSED"&&<button onClick={()=>mutate(data.status)} disabled={isPending}>{data.status=="SUBMISSION"?"התחלת הצבעה":"סגירה והכרזה על הזוכות"}</button>}  
-    {actionError&&getErrorMessage(actionError)}
+    <p className="error">{actionError&&getErrorMessage(actionError)}</p>
     </>
 }

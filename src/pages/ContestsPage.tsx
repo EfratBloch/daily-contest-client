@@ -15,6 +15,7 @@ export function ContestsPage() {
     ,placeholderData:keepPreviousData})
         return <>
         <h1>כל התחרויות</h1>
+        <div className="filters">
         <input value={search} onChange={(e)=>{setSearch(e.target.value);setPage(1)}}placeholder="חיפוש"></input>
         <select value={status} onChange={(e)=>{setStatus(e.target.value as ContestsStatus | "");setPage(1)}}>
         <option value="">הכול</option>
@@ -26,10 +27,13 @@ export function ContestsPage() {
         <option value="newest">מהחדשה לישנה</option>
         <option value="oldest">מהישנה לחדשה</option>
         </select>
+        </div>
         {isLoading&&<p>טוען...</p>}
         {error&&<p>{getErrorMessage(error)}</p>}
+        <div className="grid">
         {data?.items.map(c=><ContestCard contest={c} key={c.id}></ContestCard>)}
-        {data&&<div>        
+        </div>
+        {data&&<div className="pagination">
         <button disabled={page===1} onClick={()=>setPage(page-1)}>הקודם</button>
         <p>עמוד {data.page} מתוך {data.totalPages}</p>
         <button disabled={page===data.totalPages} onClick={()=>setPage(page+1)}>הבא</button>

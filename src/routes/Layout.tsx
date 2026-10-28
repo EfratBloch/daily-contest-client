@@ -7,9 +7,9 @@ export function Layout(){
         logout();
         navigate('/')}
    return <>
-   <header>
-        DAILYCONTEST
-        <nav>
+   <header className="site-header">
+        <span className="logo">DAILYCONTEST</span>
+        <nav className="nav">
             <Link to ='/'>דף הבית</Link>
             <Link to ='/today'>תחרות היום</Link>
             <Link to ='/contests'>לכל התחרויות</Link>
@@ -18,7 +18,7 @@ export function Layout(){
             {user&&<><p>שלום ל{user.name}</p><button onClick={handleLogout}>התנתקות</button>{user.role==='USER'?<Link to ='/my-submissions'>ההגשות שלי</Link>:<Link to ='/admin/contests/new'>תחרות חדשה</Link>}</>}
         </nav>
     </header>
-    <main><Outlet/></main>
+    <main className="container"><Outlet/></main>
 
     </>
 }

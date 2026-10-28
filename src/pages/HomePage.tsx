@@ -8,8 +8,8 @@ export function HomePage(){
     if(error)
         return <p>{getErrorMessage(error)}</p>
     if(!(data?.activeContest))
-        return <p>אין כרגע תחרות פעילה</p>
-    return <>    
+        return <div className="home"><p>אין כרגע תחרות פעילה</p></div>
+    return <div className="home">
     <h1>{data.activeContest.title}</h1>
-    </>
+    </div>
 }
